@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Text File</title>
+</head>
+<body>
+    <form id="textForm">
+        <textarea id="textInput" rows="10" cols="30" placeholder="Type something..."></textarea><br>
+        <button type="button" onclick="downloadFile()">Download as Text File</button>
+    </form>
+
+    <script>
+        function downloadFile() {
+            const text = document.getElementById('textInput').value;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'myfile.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
